@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>사무실 문의 접수 — 포인트부동산</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; background: #f1f5f9; color: #1e293b; min-height: 100vh; }
+  .wrap { max-width: 600px; margin: 0 auto; padding: 2rem 1rem 5rem; }
+  .header { text-align: center; margin-bottom: 2rem; }
+  .logo { display: inline-flex; align-items: center; gap: 8px; background: #fff; border: 1px solid #e2e8f0; border-radius: 30px; padding: 8px 18px; font-size: 13px; color: #64748b; margin-bottom: 1.2rem; }
+  .header h1 { font-size: 22px; font-weight: 800; margin-bottom: 8px; }
+  .header p { font-size: 14px; color: #64748b; line-height: 1.7; }
+  .section { background: #fff; border-radius: 16px; padding: 1.4rem; margin-bottom: 1rem; border: 1px solid #e9edf2; }
+  .section-title { font-size: 11px; font-weight: 700; color: #94a3b8; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 1rem; }
+  .field { margin-bottom: 1rem; }
+  .field:last-child { margin-bottom: 0; }
+  label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+  label .opt { font-size: 12px; font-weight: 400; color: #94a3b8; margin-left: 4px; }
+  .req { color: #ef4444; }
+  input[type=text], input[type=number], textarea { width: 100%; padding: 11px 14px; font-size: 14px; border: 1.5px solid #e2e8f0; border-radius: 10px; background: #f8fafc; color: #1e293b; font-family: inherit; outline: none; transition: border .15s; }
+  input:focus, textarea:focus { border-color: #2563eb; background: #fff; }
+  textarea { resize: vertical; min-height: 80px; line-height: 1.6; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { padding: 8px 16px; border-radius: 20px; border: 1.5px solid #e2e8f0; background: #f8fafc; font-size: 13px; cursor: pointer; color: #64748b; font-weight: 500; transition: all .15s; user-select: none; }
+  .chip.on { background: #eff6ff; border-color: #2563eb; color: #1e40af; font-weight: 600; }
+  .checks { border: 1.5px solid #e2e8f0; border-radius: 10px; overflow: hidden; }
+  .check-row { display: flex; align-items: center; gap: 10px; padding: 11px 14px; border-bottom: 1px solid #f1f5f9; cursor: pointer; }
+  .check-row:last-child { border-bottom: none; }
+  .check-row:hover { background: #f8fafc; }
+  .check-row input[type=checkbox] { width: 17px; height: 17px; cursor: pointer; accent-color: #2563eb; flex-shrink: 0; }
+  .check-row span { font-size: 14px; color: #374151; }
+  .hint { font-size: 12px; color: #94a3b8; margin-top: 5px; }
+  .submit-btn { width: 100%; padding: 15px; border-radius: 12px; border: none; background: linear-gradient(135deg, #1d4ed8, #2563eb); color: #fff; font-size: 16px; font-weight: 700; cursor: pointer; font-family: inherit; margin-top: 1.5rem; transition: opacity .2s; }
+  .submit-btn:hover { opacity: .88; }
+  .done-wrap { display: none; text-align: center; padding: 3rem 1rem; }
+  .done-icon { width: 72px; height: 72px; background: #f0fdf4; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.2rem; font-size: 34px; }
+  .done-wrap h2 { font-size: 20px; font-weight: 800; margin-bottom: 8px; }
+  .done-wrap p { font-size: 14px; color: #64748b; line-height: 1.8; }
+  .summary-box { text-align: left; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.2rem; margin-top: 1.5rem; font-size: 13px; line-height: 2.2; }
+  .srow { display: flex; gap: 8px; }
+  .skey { color: #94a3b8; min-width: 90px; flex-shrink: 0; }
+  .sval { color: #1e293b; font-weight: 600; }
+  .retry-btn { margin-top: 1.5rem; padding: 11px 28px; border-radius: 30px; border: 1px solid #e2e8f0; background: #fff; font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit; color: #374151; }
+  .footer { text-align: center; margin-top: 2rem; font-size: 12px; color: #cbd5e1; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div id="formWrap">
+    <div class="header">
+      <div class="logo">🏢 포인트부동산 · 마곡지구 사무실 전문</div>
+      <h1>사무실 문의 접수</h1>
+      <p>원하시는 조건을 입력해 주시면<br>맞춤 매물을 빠르게 안내해 드릴게요.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-title">기본 정보</div>
+      <div class="field"><label>성함 <span class="req">*</span></label><input type="text" id="name" placeholder="홍길동"></div>
+      <div class="field"><label>연락처 <span class="req">*</span></label><input type="text" id="phone" placeholder="010-0000-0000"></div>
+      <div class="field"><label>회사명 <span class="opt">(선택)</span></label><input type="text" id="company" placeholder="(주)회사명"></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">희망 위치 <span style="font-size:11px;color:#94a3b8;font-weight:400">(복수 선택)</span></div>
+      <div class="chips" id="locChips">
+        <div class="chip" data-v="마곡">마곡</div>
+        <div class="chip" data-v="발산">발산</div>
+        <div class="chip" data-v="마곡나루">마곡나루</div>
+        <div class="chip" data-v="양천향교">양천향교</div>
+        <div class="chip" data-v="증미">증미</div>
+        <div class="chip" data-v="무관">무관 (어디든 가능)</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">예산</div>
+      <div class="row">
+        <div class="field"><label>보증금 <span class="opt">(만원)</span></label><input type="number" id="deposit" placeholder="예) 3000"></div>
+        <div class="field"><label>월세 <span class="opt">(만원/월)</span></label><input type="number" id="rent" placeholder="예) 200"></div>
+      </div>
+      <div class="hint">※ 최대 가능 금액 기준 (VAT 별도)</div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">희망 평수</div>
+      <div class="row">
+        <div class="field"><label>최소 <span class="opt">(평)</span></label><input type="number" id="sMin" placeholder="예) 20"></div>
+        <div class="field"><label>최대 <span class="opt">(평)</span></label><input type="number" id="sMax" placeholder="예) 50"></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">내부 레이아웃</div>
+      <div class="field">
+        <label>독립 룸 개수</label>
+        <div class="chips" id="roomChips" data-single="1">
+          <div class="chip" data-v="불필요">불필요</div>
+          <div class="chip" data-v="1개">1개</div>
+          <div class="chip" data-v="2개">2개</div>
+          <div class="chip" data-v="3개">3개</div>
+          <div class="chip" data-v="4개 이상">4개 이상</div>
+        </div>
+      </div>
+      <div class="field" style="margin-top:1rem">
+        <label>업무공간 수용 인원</label>
+        <div class="chips" id="staffChips" data-single="1">
+          <div class="chip" data-v="5명 이하">5명 이하</div>
+          <div class="chip" data-v="6~10명">6~10명</div>
+          <div class="chip" data-v="11~20명">11~20명</div>
+          <div class="chip" data-v="21~30명">21~30명</div>
+          <div class="chip" data-v="30명 이상">30명 이상</div>
+        </div>
+      </div>
+      <div class="field" style="margin-top:1rem">
+        <label>필요한 공간 <span class="opt">(복수 선택)</span></label>
+        <div class="checks">
+          <label class="check-row"><input type="checkbox" id="f1"><span>탕비실</span></label>
+          <label class="check-row"><input type="checkbox" id="f2"><span>창고</span></label>
+          <label class="check-row"><input type="checkbox" id="f3"><span>싱크대</span></label>
+          <label class="check-row"><input type="checkbox" id="f4"><span>회의실</span></label>
+          <label class="check-row"><input type="checkbox" id="f5"><span>전용 화장실</span></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">기타 원하시는 사항</div>
+      <div class="field">
+        <label>환경 · 분위기 <span class="opt">(복수 선택)</span></label>
+        <div class="chips" id="envChips">
+          <div class="chip" data-v="채광이 좋은">채광이 좋은</div>
+          <div class="chip" data-v="개방감이 있는">개방감이 있는</div>
+          <div class="chip" data-v="조용한">조용한</div>
+          <div class="chip" data-v="코너 사무실">코너 사무실</div>
+          <div class="chip" data-v="고층 뷰">고층 뷰</div>
+          <div class="chip" data-v="로비가 넓은 건물">로비가 넓은 건물</div>
+        </div>
+      </div>
+      <div class="field" style="margin-top:1rem">
+        <label>편의시설 <span class="opt">(복수 선택)</span></label>
+        <div class="chips" id="convChips">
+          <div class="chip" data-v="주차 가능">주차 가능</div>
+          <div class="chip" data-v="엘리베이터">엘리베이터</div>
+          <div class="chip" data-v="지하철 역세권">지하철 역세권</div>
+          <div class="chip" data-v="식당가 인근">식당가 인근</div>
+          <div class="chip" data-v="카페 인근">카페 인근</div>
+        </div>
+      </div>
+      <div class="field" style="margin-top:1rem">
+        <label>입주 희망 시기</label>
+        <div class="chips" id="timeChips" data-single="1">
+          <div class="chip" data-v="즉시 가능">즉시 가능</div>
+          <div class="chip" data-v="1개월 이내">1개월 이내</div>
+          <div class="chip" data-v="3개월 이내">3개월 이내</div>
+          <div class="chip" data-v="6개월 이내">6개월 이내</div>
+          <div class="chip" data-v="미정">미정</div>
+        </div>
+      </div>
+      <div class="field" style="margin-top:1rem">
+        <label>추가로 전달하고 싶은 내용 <span class="opt">(선택)</span></label>
+        <textarea id="memo" placeholder="예) 1층 제외, 주차 2대 이상, 간판 설치 가능한 곳 등 자유롭게 적어주세요."></textarea>
+      </div>
+    </div>
+
+    <button class="submit-btn" id="submitBtn">문의 접수하기</button>
+  </div>
+
+  <div class="done-wrap" id="doneWrap">
+    <div class="done-icon">✅</div>
+    <h2>문의가 접수됐습니다!</h2>
+    <p>빠르게 확인 후 연락드릴게요.<br>아래는 입력하신 내용 요약이에요.</p>
+    <div class="summary-box" id="summaryBox"></div>
+    <button class="retry-btn" id="retryBtn">다시 작성하기</button>
+  </div>
+
+  <div class="footer">포인트부동산 · 마곡지구 사무실 전문 중개</div>
+</div>
+
+<script>
+  // 칩 클릭
+  document.querySelectorAll('.chips').forEach(group => {
+    const single = group.dataset.single === '1';
+    group.querySelectorAll('.chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        if (single) {
+          group.querySelectorAll('.chip').forEach(c => c.classList.remove('on'));
+          chip.classList.add('on');
+        } else {
+          chip.classList.toggle('on');
+        }
+      });
+    });
+  });
+
+  function chips(id) {
+    return [...document.querySelectorAll('#' + id + ' .chip.on')].map(c => c.dataset.v).join(', ') || '미선택';
+  }
+  function checked() {
+    return ['f1','f2','f3','f4','f5'].filter(id => document.getElementById(id).checked)
+      .map(id => document.getElementById(id).nextElementSibling.textContent).join(', ') || '없음';
+  }
+
+  document.getElementById('submitBtn').addEventListener('click', () => {
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    if (!name || !phone) { alert('성함과 연락처는 필수입니다.'); return; }
+
+    const sMin = document.getElementById('sMin').value;
+    const sMax = document.getElementById('sMax').value;
+    const size = sMin && sMax ? sMin+'~'+sMax+'평' : sMin ? sMin+'평 이상' : sMax ? sMax+'평 이하' : '미기입';
+
+    const data = {
+      '성함': name, '연락처': phone,
+      '회사명': document.getElementById('company').value.trim() || '미기입',
+      '희망 위치': chips('locChips'),
+      '보증금': document.getElementById('deposit').value ? document.getElementById('deposit').value+'만원' : '미기입',
+      '월세': document.getElementById('rent').value ? document.getElementById('rent').value+'만원/월' : '미기입',
+      '희망 평수': size,
+      '룸 개수': chips('roomChips'),
+      '수용 인원': chips('staffChips'),
+      '필요 공간': checked(),
+      '환경 선호': chips('envChips'),
+      '편의시설': chips('convChips'),
+      '입주 시기': chips('timeChips'),
+      '추가 요청': document.getElementById('memo').value.trim() || '없음',
+    };
+
+    document.getElementById('formWrap').style.display = 'none';
+    document.getElementById('doneWrap').style.display = 'block';
+    window.scrollTo(0, 0);
+
+    document.getElementById('summaryBox').innerHTML = Object.entries(data)
+      .map(([k,v]) => `<div class="srow"><span class="skey">${k}</span><span class="sval">${v}</span></div>`)
+      .join('');
+  });
+
+  document.getElementById('retryBtn').addEventListener('click', () => {
+    document.getElementById('formWrap').style.display = 'block';
+    document.getElementById('doneWrap').style.display = 'none';
+    window.scrollTo(0, 0);
+  });
+</script>
+</body>
+</html>
