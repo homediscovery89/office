@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>사무실 추천 리스트 — 포인트부동산</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; background: #f1f5f9; color: #1e293b; }
+  .wrap { max-width: 680px; margin: 0 auto; padding: 1.8rem 1rem 5rem; }
+  .header { background: #fff; border-radius: 16px; border: 1px solid #e2e8f0; padding: 1.6rem; margin-bottom: 1rem; }
+  .brand { display: flex; align-items: center; gap: 10px; margin-bottom: 1.2rem; }
+  .brand-icon { width: 38px; height: 38px; background: #1e3a5f; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+  .brand-name { font-size: 15px; font-weight: 700; }
+  .brand-sub { font-size: 12px; color: #64748b; margin-top: 1px; }
+  .proposal-title { font-size: 20px; font-weight: 800; margin-bottom: 6px; }
+  .proposal-meta { font-size: 13px; color: #64748b; margin-bottom: 1rem; }
+  .greeting { font-size: 14px; color: #64748b; line-height: 1.8; padding: 1rem; background: #f8fafc; border-radius: 10px; }
+  .notices { display: flex; flex-direction: column; gap: 8px; margin-bottom: 1rem; }
+  .notice { display: flex; gap: 10px; align-items: flex-start; background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 12px 14px; font-size: 13px; color: #64748b; line-height: 1.7; }
+  .section-label { font-size: 11px; font-weight: 700; color: #94a3b8; letter-spacing: .08em; text-transform: uppercase; margin: 1.4rem 0 .8rem; }
+  .card { background: #fff; border: 1px solid #e2e8f0; border-radius: 16px; margin-bottom: 14px; overflow: hidden; }
+  .card:hover { box-shadow: 0 4px 20px rgba(0,0,0,.08); }
+  .card-header { padding: 1.2rem 1.4rem 1rem; display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+  .tag-station { display: inline-block; background: #e8f0fe; color: #1a56db; font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 20px; margin-bottom: 6px; }
+  .card-name { font-size: 16px; font-weight: 800; margin-bottom: 3px; }
+  .card-addr { font-size: 12px; color: #64748b; }
+  .card-price { font-size: 18px; font-weight: 800; color: #1e3a5f; text-align: right; }
+  .card-price-sub { font-size: 11px; color: #94a3b8; margin-top: 2px; text-align: right; }
+  .card-stats { display: flex; border-top: 1px solid #f1f5f9; border-bottom: 1px solid #f1f5f9; }
+  .stat { flex: 1; padding: 10px 0; text-align: center; border-right: 1px solid #f1f5f9; }
+  .stat:last-child { border-right: none; }
+  .stat-label { font-size: 10px; color: #94a3b8; margin-bottom: 3px; }
+  .stat-val { font-size: 13px; font-weight: 700; }
+  .card-features { padding: 12px 1.4rem; }
+  .feature-list { display: flex; flex-wrap: wrap; gap: 6px; }
+  .feature { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 20px; padding: 4px 10px; font-size: 12px; color: #64748b; }
+  .card-footer { padding: 10px 1.4rem 1.2rem; display: flex; gap: 8px; }
+  .btn-photo { flex: 1; padding: 9px; border-radius: 8px; border: 1px solid #e2e8f0; background: #f8fafc; font-size: 13px; font-weight: 600; cursor: pointer; font-family: inherit; color: #374151; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 4px; }
+  .btn-contact { flex: 1; padding: 9px; border-radius: 8px; border: none; background: #1e3a5f; color: #fff; font-size: 13px; font-weight: 600; cursor: pointer; font-family: inherit; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 4px; }
+  .footer { text-align: center; margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid #e2e8f0; }
+  .footer p { font-size: 13px; color: #64748b; line-height: 1.9; }
+  .footer .tel { font-size: 17px; font-weight: 700; margin-top: 4px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="header">
+    <div class="brand">
+      <div class="brand-icon">🏢</div>
+      <div>
+        <div class="brand-name">포인트부동산</div>
+        <div class="brand-sub">마곡지구 사무실 전문 중개</div>
+      </div>
+    </div>
+    <div class="proposal-title">사무실 추천 리스트</div>
+    <div class="proposal-meta">제안일: 2026년 3월 24일 &nbsp;·&nbsp; 담당: 금종한 공인중개사</div>
+    <div class="greeting">안녕하세요. 포인트부동산입니다.<br>20~30평대 사무실 추천 리스트 전달드립니다. 관심 있는 매물 말씀해 주시면 자세한 설명과 현장 방문 일정을 잡아드리겠습니다.</div>
+  </div>
+
+  <div class="notices">
+    <div class="notice"><span>💡</span><span>관리비는 전용면적(평)당 <strong>15,000~17,000원</strong> 수준입니다. (전기·가스·수도 별도 부과)</span></div>
+    <div class="notice"><span>❄️</span><span>마곡지구는 모든 건물이 <strong>중앙냉난방 시스템</strong>으로, 정해진 시간에만 냉난방 가동이 가능합니다. (빌딩마다 상이)</span></div>
+  </div>
+
+  <div class="section-label">사무실 리스트 — 3개 매물</div>
+
+  <div class="card">
+    <div class="card-header">
+      <div>
+        <div class="tag-station">5호선 마곡역 도보 4분</div>
+        <div class="card-name">GMG 엘스타</div>
+        <div class="card-addr">마곡동 774-1</div>
+      </div>
+      <div>
+        <div class="card-price">1,500 / 150</div>
+        <div class="card-price-sub">보증금(만) / 월세(만) · VAT별도</div>
+      </div>
+    </div>
+    <div class="card-stats">
+      <div class="stat"><div class="stat-label">전용면적</div><div class="stat-val">19.46평</div></div>
+      <div class="stat"><div class="stat-label">층수</div><div class="stat-val">10층</div></div>
+      <div class="stat"><div class="stat-label">주차</div><div class="stat-val">무료 2대</div></div>
+      <div class="stat"><div class="stat-label">입주</div><div class="stat-val">협의 가능</div></div>
+    </div>
+    <div class="card-features">
+      <div class="feature-list">
+        <span class="feature">🏢 업무홀</span>
+        <span class="feature">🚪 룸 4개</span>
+        <span class="feature">☕ 탕비실</span>
+        <span class="feature">🌿 베란다</span>
+        <span class="feature">✨ 풀인테리어 무상제공</span>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a class="btn-photo" href="https://homediscovery.notion.site/GMG-32d248f8938681f98ba9e563a2053da0" target="_blank">📷 내부 사진 보기</a>
+      <a class="btn-contact" href="tel:010-0000-0000">📞 이 매물 문의</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div>
+        <div class="tag-station">5호선 마곡역 도보 3분</div>
+        <div class="card-name">한일노벨리아</div>
+        <div class="card-addr">마곡동 798-17</div>
+      </div>
+      <div>
+        <div class="card-price">2,000 / 160</div>
+        <div class="card-price-sub">보증금(만) / 월세(만) · VAT별도</div>
+      </div>
+    </div>
+    <div class="card-stats">
+      <div class="stat"><div class="stat-label">전용면적</div><div class="stat-val">21.58평</div></div>
+      <div class="stat"><div class="stat-label">층수</div><div class="stat-val">7층</div></div>
+      <div class="stat"><div class="stat-label">주차</div><div class="stat-val">무료 2대</div></div>
+      <div class="stat"><div class="stat-label">입주</div><div class="stat-val">즉시 가능</div></div>
+    </div>
+    <div class="card-features">
+      <div class="feature-list">
+        <span class="feature">🏢 업무공간</span>
+        <span class="feature">🚪 룸 2개</span>
+        <span class="feature">🌿 베란다</span>
+        <span class="feature">🚰 싱크대</span>
+        <span class="feature">📦 즉시 입주 가능</span>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a class="btn-photo" href="https://homediscovery.notion.site/32d248f89386807cac6efc672caa7c6d" target="_blank">📷 내부 사진 보기</a>
+      <a class="btn-contact" href="tel:010-0000-0000">📞 이 매물 문의</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div>
+        <div class="tag-station">9호선 마곡나루역 도보 4분</div>
+        <div class="card-name">두산더랜드파크</div>
+        <div class="card-addr">마곡동 757</div>
+      </div>
+      <div>
+        <div class="card-price">2,000 / 160</div>
+        <div class="card-price-sub">보증금(만) / 월세(만) · VAT별도</div>
+      </div>
+    </div>
+    <div class="card-stats">
+      <div class="stat"><div class="stat-label">전용면적</div><div class="stat-val">19.58평</div></div>
+      <div class="stat"><div class="stat-label">층수</div><div class="stat-val">4층</div></div>
+      <div class="stat"><div class="stat-label">주차</div><div class="stat-val">정기 2대</div></div>
+      <div class="stat"><div class="stat-label">입주</div><div class="stat-val">즉시 가능</div></div>
+    </div>
+    <div class="card-features">
+      <div class="feature-list">
+        <span class="feature">🚪 룸 2개</span>
+        <span class="feature">✨ 인테리어 완비</span>
+        <span class="feature">🌿 베란다 서비스</span>
+        <span class="feature">🏋️ 라운지·헬스장</span>
+        <span class="feature">🤝 공유 미팅룸</span>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a class="btn-photo" href="https://homediscovery.notion.site/32d248f893868025b6fcdb87f46bd6a1" target="_blank">📷 내부 사진 보기</a>
+      <a class="btn-contact" href="tel:010-0000-0000">📞 이 매물 문의</a>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>궁금한 점은 언제든 연락 주세요.<br>현장 방문 일정도 편하게 말씀해 주세요.</p>
+    <div class="tel">📞 금종한 공인중개사</div>
+    <p style="margin-top:4px;font-size:12px;color:#94a3b8">포인트부동산 · 마곡지구 사무실 전문</p>
+  </div>
+</div>
+</body>
+</html>
